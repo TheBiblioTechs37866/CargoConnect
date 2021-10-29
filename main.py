@@ -26,14 +26,8 @@ def robot_stop():
     right_motor.brake()
     wait(seconds(0.25))
 
-'''def straight_left_straight(distance1, angle, distance2):
-    robot.straight(inches_to_mm(distance1))
-    random.randint(sec_to_ms(1), sec_to_ms(10))
-    robot.turn(angle)
-    random.randint(sec_to_ms(1), sec_to_ms(10))
-    robot.straight(inches_to_mm(distance2))'''
-    
-def straight_to_the_top(distance):
+#Keeps robot going straight for given distance in mm
+def gyro_straight(distance):
     robot.reset()
     gyro.reset_angle(0)
 
@@ -44,11 +38,9 @@ def straight_to_the_top(distance):
         print(angle)
         robot.drive(100, angle * -1)
 
-    robot.stop()
-    left_motor.brake()
-    right_motor.brake()
-    wait(250)
+    robot_stop()
 
+#Turns the robot a certain amount (turn_angle) and turns back for accuracy
 def gyro_turn(turn_angle):
     angle = gyro.angle()
     
@@ -74,17 +66,22 @@ def gyro_turn(turn_angle):
             angle=gyro.angle()
             print(angle)
 
-def mission_08():
-    straight_to_the_top(256)
+#MISSIONS
+def mission_airdrop():
+    #Getting there
+    gyro_straight(256)
     gyro_turn(46)
-    straight_to_the_top(390)
+    gyro_straight(390)
     gyro_turn(41)
-    straight_to_the_top(800)
+    gyro_straight(800)
     gyro_turn(-31)
-    straight_to_the_top(600)
+    gyro_straight(600)
 
-# OBJECTS
+    #Interact with mission
 
+    #Getting back
+
+# INITIALIZING OBJECTS
 ev3 = EV3Brick()
 left_motor = Motor(Port.C)
 right_motor = Motor(Port.B)
@@ -94,11 +91,5 @@ robot.settings(200, 100, 150, 100)
 gyro = GyroSensor(Port.S4)
 
 # PROGRAM
-mission_08()
-#straight_to_the_top(25.4 * 3)
-#gyro_turn(-90)
 
-
-#This is a change
-#This is another change
 
