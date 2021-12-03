@@ -111,11 +111,11 @@ def wait_for_button(ev3):
 #The while true statement makes it so this only happens when the button is "true"
 def button_choices():
     while True:
-    button = wait_for_button(ev3)
+        button = wait_for_button(ev3)
 
-    if button == Button.LEFT:
-        ev3.speaker.beep(200)
-        mission_airdrop()
+        if button == Button.LEFT:
+            ev3.speaker.beep(200)
+            mission_airdrop()
 
         
 button_choices()
