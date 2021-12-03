@@ -6,6 +6,8 @@ from pybricks.parameters import Port, Stop, Direction, Button, Color
 from pybricks.tools import wait, StopWatch, DataLog
 from pybricks.robotics import DriveBase
 from pybricks.media.ev3dev import SoundFile, ImageFile
+
+
 import random
 
 # This program requires LEGO EV3 MicroPython v2.0 or higher.
@@ -24,7 +26,7 @@ def robot_stop():
     robot.stop()
     left_motor.brake()
     right_motor.brake()
-    wait(seconds(0.25))
+    wait(sec_to_ms(0.25))
 
 #Keeps robot going straight for given distance in mm
 def gyro_straight(distance):
@@ -91,5 +93,29 @@ robot.settings(200, 100, 150, 100)
 gyro = GyroSensor(Port.S4)
 
 # PROGRAM
+def wait_for_button(ev3):
+    #This code comes from the button example project in the ev3 module
+    pressed = []
+    while len(pressed) != 1:
+        pressed = ev3.buttons.pressed()
+    button = pressed[0]
+
+    while any(ev3.buttons.pressed()):
+        pass
+
+    return button
 
 
+#This funtction waits for a button to be pressed.
+#Once the button is pressed it plays the code
+#The while true statement makes it so this only happens when the button is "true"
+def button_choices():
+    while True:
+    button = wait_for_button(ev3)
+
+    if button == Button.LEFT:
+        ev3.speaker.beep(200)
+        mission_airdrop()
+
+        
+button_choices()
