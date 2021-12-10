@@ -72,12 +72,12 @@ def gyro_turn(turn_angle):
 def mission_airdrop():
     #Getting there
     gyro_straight(256)
-    gyro_turn(46)
-    gyro_straight(390)
-    gyro_turn(41)
+    gyro_turn(50)
+    gyro_straight(395)
+    gyro_turn(38)
     gyro_straight(800)
     gyro_turn(-31)
-    gyro_straight(600)
+    gyro_straight(620)
 
     #Interact with mission
 
@@ -93,6 +93,20 @@ robot.settings(200, 100, 150, 100)
 gyro = GyroSensor(Port.S4)
 
 # PROGRAM
+def missionplane():
+    gyro_straight(inches_to_mm(23))
+    gyro_turn(-28)
+    gyro_straight(inches_to_mm(2.5))
+    front_motor.run_angle(1000, -2900)
+    front_motor.run_angle(1000, 3000)
+    gyro_turn(-110)
+    gyro_straight(inches_to_mm(25))
+
+def truck():
+    gyro_straight(inches_to_mm(18))
+    robot.straight(inches_to_mm(-18))
+    print("test")
+
 def wait_for_button(ev3):
     #This code comes from the button example project in the ev3 module
     pressed = []
@@ -106,16 +120,22 @@ def wait_for_button(ev3):
     return button
 
 
-#This funtction waits for a button to be pressed.
+#This function waits for a button to be pressed.
 #Once the button is pressed it plays the code
 #The while true statement makes it so this only happens when the button is "true"
+
+
 def button_choices():
     while True:
         button = wait_for_button(ev3)
 
-        if button == Button.LEFT:
-            ev3.speaker.beep(200)
+        if button == Button.RIGHT:
+            ev3.speaker.beep(400)
             mission_airdrop()
-
-        
+        elif button == Button.LEFT:
+            ev3.speaker.beep(200) 
+            missionplane()
+        elif button == Button.DOWN:
+            ev3.speaker.beep(600)
+            truck()
 button_choices()
