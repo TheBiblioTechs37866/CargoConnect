@@ -79,20 +79,6 @@ def mission_airdrop():
     gyro_turn(-31)
     gyro_straight(620)
 
-    #Interact with mission
-
-    #Getting back
-
-# INITIALIZING OBJECTS
-ev3 = EV3Brick()
-left_motor = Motor(Port.C)
-right_motor = Motor(Port.B)
-front_motor = Motor(Port.A)
-robot = DriveBase(left_motor, right_motor, WHEEL_DIAMETER, 120)
-robot.settings(200, 100, 150, 100)
-gyro = GyroSensor(Port.S4)
-
-# PROGRAM
 def missionplane():
     gyro_straight(inches_to_mm(23))
     gyro_turn(-28)
@@ -119,12 +105,9 @@ def wait_for_button(ev3):
 
     return button
 
-
 #This function waits for a button to be pressed.
 #Once the button is pressed it plays the code
 #The while true statement makes it so this only happens when the button is "true"
-
-
 def button_choices():
     while True:
         button = wait_for_button(ev3)
@@ -138,4 +121,15 @@ def button_choices():
         elif button == Button.DOWN:
             ev3.speaker.beep(600)
             truck()
+
+# INITIALIZING OBJECTS
+ev3 = EV3Brick()
+left_motor = Motor(Port.C)
+right_motor = Motor(Port.B)
+front_motor = Motor(Port.A)
+robot = DriveBase(left_motor, right_motor, WHEEL_DIAMETER, 120)
+robot.settings(200, 100, 150, 100)
+gyro = GyroSensor(Port.S4)
+
+# PROGRAM
 button_choices()
