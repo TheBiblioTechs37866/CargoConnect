@@ -132,4 +132,9 @@ robot.settings(200, 100, 150, 100)
 gyro = GyroSensor(Port.S4)
 
 # PROGRAM
-button_choices()
+# button_choices()
+
+
+gyro_straight((inches_to_mm(42)))
+gyro_turn(15)
+gyro_straight((inches_to_mm(12)))
