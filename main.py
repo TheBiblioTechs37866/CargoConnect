@@ -70,7 +70,6 @@ def gyro_turn(turn_angle):
 
 #MISSIONS
 def mission_airdrop():
-    #Getting there
     gyro_straight(256)
     gyro_turn(50)
     gyro_straight(397)
@@ -81,9 +80,9 @@ def mission_airdrop():
 
 def missionplane():
     gyro_straight(inches_to_mm(23))
-    gyro_turn(-28)
+    gyro_turn(-29)
     gyro_straight(inches_to_mm(2.5))
-    front_motor.run_angle(1000, -2900)
+    front_motor.run_angle(1000, -3000)
     front_motor.run_angle(1000, 3000)
     gyro_turn(-110)
     gyro_straight(inches_to_mm(25))
@@ -92,6 +91,9 @@ def truck():
     gyro_straight(inches_to_mm(18))
     robot.straight(inches_to_mm(-18))
     print("test")
+
+def lift():
+    front_motor.run_angle(1000, 300)
 
 def wait_for_button(ev3):
     #This code comes from the button example project in the ev3 module
@@ -121,6 +123,9 @@ def button_choices():
         elif button == Button.DOWN:
             ev3.speaker.beep(600)
             truck()
+        elif button == Button.UP:
+            ev3.speaker.beep(800)
+            lift()
 
 # INITIALIZING OBJECTS
 ev3 = EV3Brick()
@@ -128,7 +133,7 @@ left_motor = Motor(Port.C)
 right_motor = Motor(Port.B)
 front_motor = Motor(Port.A)
 robot = DriveBase(left_motor, right_motor, WHEEL_DIAMETER, 120)
-robot.settings(200, 100, 150, 100)
+robot.settings(200, 50, 150, 100)
 gyro = GyroSensor(Port.S4)
 
 # PROGRAM
