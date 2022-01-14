@@ -38,7 +38,7 @@ def gyro_straight(distance):
     while robot.distance() <= distance:
         angle = gyro.angle()
         print(angle)
-        robot.drive(100, angle * -1)
+        robot.drive(175, angle * -1)
 
     robot_stop()
 
@@ -73,8 +73,8 @@ def mission_airdrop():
     #Getting there
     gyro_straight(256)
     gyro_turn(50)
-    gyro_straight(395)
-    gyro_turn(38)
+    gyro_straight(397)
+    gyro_turn(36)
     gyro_straight(800)
     gyro_turn(-31)
     gyro_straight(620)
